@@ -11,16 +11,29 @@ namespace MyCalendarApp.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly EventService EventService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(EventService eventService)
         {
-            _logger = logger;
+            this.EventService = eventService;
         }
 
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost]
+        public bool SaveEvent(Event e) {
+            if (e != null)
+            {
+                EventService.SaveEvent(e);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public IActionResult Privacy()

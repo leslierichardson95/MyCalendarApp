@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MyCalendarApp.Models;
 
 namespace MyCalendarApp
 {
@@ -24,6 +25,7 @@ namespace MyCalendarApp
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddSingleton<EventService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

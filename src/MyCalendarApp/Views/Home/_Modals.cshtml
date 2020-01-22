@@ -31,16 +31,16 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <form class="col-md-12 form-horizontal">
+                <form class="col-md-12 form-horizontal" action="AddNewEvent">
                     <input type="hidden" id="hdEventID" value="0" />
                     <div class="form-group">
                         <label>Event Title</label>
-                        <input type="text" id="txtSubject" class="form-control" />
+                        <input type="text" name="Title" id="txtSubject" class="form-control" required />
                     </div>
                     <div class="form-group">
                         <label>Start Time</label>
                         <div class="input-group date" id="dtp1" data-target-input="nearest">
-                            <input type="text" id="txtStart" class="form-control" data-target="#dtp1" />
+                            <input type="text" name="StartTime" id="txtStart" class="form-control" data-target="#dtp1" required />
                             <div class="input-group-append" data-target="#dtp1" data-toggle="datetimepicker">
                                 <div class="input-group-text"><span class="far fa-calendar-alt"></span></div>
                             </div>
@@ -48,13 +48,13 @@
                     </div>
                     <div class="form-group">
                         <div class="checkbox">
-                            <label><input type="checkbox" id="chkIsFullDay" checked="checked" />  Full Day </label>
+                            <label><input type="checkbox" name="IsFullDay" id="chkIsFullDay" checked="checked" />  Full Day </label>
                         </div>
                     </div>
                     <div class="form-group" id="divEndDate">
                         <label>End Time</label>
                         <div class="input-group date" id="dtp2" data-target-input="nearest">
-                            <input type="text" id="txtEnd" class="form-control" data-target="#dtp2" />
+                            <input type="text" name="EndTime" id="txtEnd" class="form-control" data-target="#dtp2" required />
                             <div class="input-group-append" data-target="#dtp2" data-toggle="datetimepicker">
                                 <div class="input-group-text"><i class="far fa-calendar-alt"></i></div>
                             </div>
@@ -62,17 +62,28 @@
                     </div>
                     <div class="form-group">
                         <label>Description</label>
-                        <textarea id="txtDescription" rows="3" class="form-control"></textarea>
+                        <textarea name="Description" id="txtDescription" rows="3" class="form-control"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>Upload Event Image</label>
+                        <div class="custom-file">
+                            <label class="custom-file-label" for="eventImage"></label>
+                            <input type="file" name="Image" class="custom-file-input" accept="image/*" id="eventImage" />
+                        </div>
                     </div>
                     <div class="form-group">
                         <label>Theme Color</label>
-                        <select id="ddThemeColor" class="form-control">
+                        <select name="Color" id="ddThemeColor" class="form-control">
                             <option value="">Default</option>
                             <option value="red">Red</option>
                             <option value="blue">Blue</option>
                             <option value="black">Black</option>
                             <option value="green">Green</option>
                         </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Event Tags</label>
+                        <input type="text" name="Tags" id="eventTags" class="form-control" placeholder="Separate each tag with a comma (,)"/>
                     </div>
                     <button type="button" id="btnSave" class="btn btn-success">Save</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

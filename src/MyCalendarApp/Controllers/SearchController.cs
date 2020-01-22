@@ -4,16 +4,17 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MyCalendarApp.Models;
 
 namespace MyCalendarApp.Controllers
 {
     public class SearchController : Controller
     {
-        private readonly ILogger<SearchController> _logger;
+        private readonly EventService eventService;
 
-        public SearchController(ILogger<SearchController> logger)
+        public SearchController(EventService eventService)
         {
-            _logger = logger;
+            this.eventService = eventService;
         }
 
         public IActionResult SearchEvents()
