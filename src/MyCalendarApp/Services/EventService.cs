@@ -7,21 +7,14 @@ using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 using System.Text.Json;
 using Microsoft.AspNetCore.Hosting;
+using System.Diagnostics.Tracing;
 
 namespace MyCalendarApp.Models
 {
     public class EventService
     {
-        //public static EventService Singleton;
 
-        //static EventService()
-        //{
-        //    Singleton = new EventService();
-        //}
-
-        private static string relativePath = "~/data/events.json";
-
-        private Dictionary<long, Event> savedEvents = new Dictionary<long, Event>();
+        private Dictionary<string, Event> savedEvents = new Dictionary<string, Event>();
 
         private string JsonFileName
         {
@@ -55,12 +48,16 @@ namespace MyCalendarApp.Models
         public void SaveEvent(Event e)
         {
             // If a saved event already exists, just update the existing event, else add the event to savedEvents dictionary
-            if (savedEvents.ContainsKey(e.Id))
+            if (e.Id != null) // check if a new event has just been created
             {
-                savedEvents[e.Id] = e;
+                if (savedEvents.ContainsKey(e.Id)) // if the event already exists, update it
+                {
+                    savedEvents[e.Id] = e;
+                }
             }
-            else
+            else // if the event is new, create a unique ID and add to savedEvents
             {
+                e.Id = Guid.NewGuid().ToString(); // generate unique GUID ID for new events
                 savedEvents.Add(e.Id, e);
             }
 
@@ -68,9 +65,25 @@ namespace MyCalendarApp.Models
             WriteJson();
         }
 
+        // Delete event from JSON file
+        public bool DeleteEvent(string eventID)
+        {
+            if (eventID == null || eventID == "") // return false if the event doesn't exist
+            { 
+                return false; 
+            }
+            else
+            {
+                savedEvents.Remove(eventID); // remove event from event dictionary
+                WriteJson(); // update JSON file
+                return true;
+            }
+        } 
+
+        // Update JSON file
         private void WriteJson()
         {
-            using (FileStream outputStream = File.OpenWrite(relativePath))
+            using (FileStream outputStream = File.OpenWrite(JsonFileName))
             {
                 System.Text.Json.JsonSerializer.Serialize<IEnumerable<Event>>(
                     new Utf8JsonWriter(outputStream, new JsonWriterOptions

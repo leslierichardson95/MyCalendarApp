@@ -1,1 +1,40 @@
-[]
+[
+  {
+    "Id": "adc9f644-0143-4a99-b236-51f708e0735a",
+    "Title": "Work out",
+    "Description": null,
+    "Color": "black",
+    "IsFullDay": false,
+    "StartTime": "2020-01-30T10:00:00",
+    "EndTime": "2020-01-30T13:00:00",
+    "Image": null,
+    "Tags": null,
+    "IsCustomEvent": true
+  },
+  {
+    "Id": "017c027c-7993-4710-9d76-3dee9e5859cb",
+    "Title": "dfsd",
+    "Description": null,
+    "Color": null,
+    "IsFullDay": false,
+    "StartTime": "2020-01-22T00:00:00",
+    "EndTime": "2020-01-25T00:00:00",
+    "Image": null,
+    "Tags": null,
+    "IsCustomEvent": true
+  }
+]
+  },
+  {
+    "Id": "017c027c-7993-4710-9d76-3dee9e5859cb",
+    "Title": "dfsd",
+    "Description": null,
+    "Color": null,
+    "IsFullDay": false,
+    "StartTime": "2020-01-22T00:00:00",
+    "EndTime": "2020-01-25T00:00:00",
+    "Image": null,
+    "Tags": null,
+    "IsCustomEvent": true
+  }
+]

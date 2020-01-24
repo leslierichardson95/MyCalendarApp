@@ -3,20 +3,19 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
+                <h4 class="modal-title" id="eventTitle"></h4>
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><span id="eventTitle"></span></h4>
             </div>
             <div class="modal-body">
-                <button id="btnDelete" class="btn btn-default btn-sm pull-right">
-                    <span class="glyphicon glyphicon-remove"></span> Remove
-                </button>
-                <button id="btnEdit" class="btn btn-default btn-sm pull-right" style="margin-right:5px;">
-                    <span class="glyphicon glyphicon-pencil"></span> Edit
-                </button>
                 <p id="pDetails"></p>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="btnEdit" class="btn btn-warning btn-sm pull-right" style="margin-right:5px;">
+                    <i class="fas fa-pencil-alt"></i> Edit Event
+                </button>
+                <button id="btnDelete" class="btn btn-danger btn-sm pull-right">
+                    <i class="fas fa-trash-alt"></i> Delete Event
+                </button>
             </div>
         </div>
     </div>
@@ -31,7 +30,7 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
             </div>
             <div class="modal-body">
-                <form class="col-md-12 form-horizontal" action="AddNewEvent">
+                <form class="col-md-12 form-horizontal">
                     <input type="hidden" id="hdEventID" value="0" />
                     <div class="form-group">
                         <label>Event Title</label>

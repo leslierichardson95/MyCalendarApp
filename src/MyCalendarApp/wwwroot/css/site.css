@@ -28,6 +28,10 @@ a {
     overflow-y: hidden !important
 }
 
+.modal {
+    overflow: auto !important;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {

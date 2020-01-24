@@ -23,17 +23,43 @@ namespace MyCalendarApp.Controllers
             return View();
         }
 
+        [HttpGet]
+        [Route("Home/GetEvents")]
+        // Return all user-saved events
+        public JsonResult GetEvents()
+        {
+            List<Event> events = EventService.GetEvents();
+            return Json(events);
+        }
+
         [HttpPost]
-        public bool SaveEvent(Event e) {
+        [Route("Home/SaveEvent")]
+        // Save the created/updated event to "event database" (aka JSON file)
+        public JsonResult SaveEvent(Event e) {
+            bool status = false;
+
+            // Notify the event service to save the event if a valid one has been created by the user
             if (e != null)
             {
-                EventService.SaveEvent(e);
-                return true;
+                e.IsCustomEvent = true;
+                EventService.SaveEvent(e); // EventService will update or create the new event accordingly before saving
+                status = true;
             }
-            else
+
+            return Json(status);
+        }
+
+        [HttpPost]
+        [Route("Home/DeleteEvent")]
+        // Delete an event from the "event database" (JSON file)
+        public JsonResult DeleteEvent(string eventID)
+        {
+            bool status = false;
+            if (EventService.DeleteEvent(eventID)) // return true status if deleting the event is successful
             {
-                return false;
+                status = true;
             }
+            return Json(status);
         }
 
         public IActionResult Privacy()

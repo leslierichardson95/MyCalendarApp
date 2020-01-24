@@ -11,7 +11,7 @@ namespace MyCalendarApp.Models
     {
         // Unique ID for each event
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
-        public long Id { get; set; }
+        public string Id { get; set; }
 
         // Name of the event
         [JsonProperty("title", NullValueHandling = NullValueHandling.Ignore)]
