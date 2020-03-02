@@ -52,6 +52,14 @@ namespace MyCalendarApp
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
+                    name: "myEvents",
+                    pattern: "{controller=MyEvents}/{action=MyEvents}/{id?}");
+
+                endpoints.MapControllerRoute(
+                    name: "eventsNearMe",
+                    pattern: "{controller=FindEvents}/{action=FindEvents}/{id?}");
+
+                endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
             });

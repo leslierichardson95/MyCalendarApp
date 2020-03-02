@@ -3,21 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using MyCalendarApp.Models;
 
 namespace MyCalendarApp.Controllers
 {
-    public class SearchController : Controller
+    // Controller for Find Events page
+    public class FindEventsController : Controller
     {
         private readonly EventService eventService;
 
-        public SearchController(EventService eventService)
-        {
-            this.eventService = eventService;
-        }
-
-        public IActionResult SearchEvents()
+        [Route("EventsNearMe")]
+        public IActionResult FindEvents()
         {
             return View();
         }

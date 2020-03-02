@@ -1,0 +1,66 @@
+﻿@model IEnumerable<Event>
+
+@{
+    ViewData["Title"] = "MyEvents";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+    <div class="text-center">
+        <h1 class="display-4">My Events</h1>
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th style="display:none;">Id</th>
+                    <th>Event</th>
+                    <th>Description</th>
+                    <th style="display:none;">Color</th>
+                    <th style="display:none;">Is Full Day</th>
+                    <th>Start Time</th>
+                    <th>End Time</th>
+                    <th style="display:none;">Image</th>
+                    <th>Tags</th>
+                    <th style="display:none;">Is Custom Event</th>
+                    <th style="display:none;"></th>
+                    <th></th> <!--Edit Event-->
+                    <th></th> <!--Delete Event-->
+                </tr>
+            </thead>
+            <tbody>
+               @foreach (Event myEvent in ViewData["MyEvents"] as List<Event>) 
+                {
+                    <tr>
+                        <td style="display:none;">@myEvent.Id</td>
+                        <td>@myEvent.Title</td>
+                        <td>@myEvent.Description</td>
+                        <td style="display:none;">@myEvent.Color</td>
+                        <td style="display:none;">@myEvent.IsFullDay</td>
+                        <td>@myEvent.StartTime</td>
+                        <td>@myEvent.EndTime</td>
+                        <td style="display: none;">@myEvent.Image</td>
+                        <td>@myEvent.Tags</td> <!--TODO: Use loop to display tags-->
+                        <td style="display: none;">@myEvent.IsCustomEvent</td>
+                        <td>
+                            <button id="myEventBtnEdit" class="btn btn-warning btn-sm pull-right" style="margin-right:5px;">
+                                <i class="fas fa-pencil-alt"></i> Edit Event
+                            </button>
+                        </td>
+                        <td>
+                            <button id="myEventBtnDelete" class="btn btn-danger btn-sm pull-right">
+                                <i class="fas fa-trash-alt"></i> Delete Event
+                            </button>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+
+    </div>
+
+    <partial name="_Modals" />
+
+<script>
+
+</script>
+
+

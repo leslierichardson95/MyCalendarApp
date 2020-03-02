@@ -97,8 +97,9 @@
         });
     }
 
+    // Open Add/Edit Modal when Edit button is clicked
     $('#btnEdit').click(function () {
-        openAddEditForm(); // open add/edit modal 
+        openAddEditForm();
     });
 
     // Delete event when "Delete Event" button is pressed
@@ -134,6 +135,76 @@
             });
     });
 
+    $('#myEventBtnEdit').click(function () {
+        var row = jQuery(this).closest('tr'); // get table row corresponding to selected "edit event" button
+        var columns = row.find('td'); // get event info from row corresponding to selected "edit event" button
+
+        // set selectedEvent to the event corresponding to the selected "Edit Event" button
+        selectedEvent = {
+            id: columns[0].innerHTML,
+            title: columns[1].innerHTML,
+            description: columns[2].innerHTML,
+            color: columns[3].innerHTML,
+            isFullDay: columns[4].innerHTML,
+            start: columns[5].innerHTML,
+            end: columns[6].innerHTML,
+            image: columns[7].innerHTML,
+            tags: columns[8].innerHTML,
+            isCustomEvent: columns[9].innerHTML
+        };
+
+        // Fill edit window with existing event info
+        $('#hdEventID').val(selectedEvent.id);
+        $('#txtSubject').val(selectedEvent.title);
+        $('#txtStart').val(selectedEvent.start);
+        $('#chkIsFullDay').prop("checked", selectedEvent.allDay || false);
+        $('#chkIsFullDay').change();
+        $('#txtEnd').val(selectedEvent.end !== null ? selectedEvent.end : '');
+        //$('#txtEnd').val(selectedEvent.end);
+        $('#txtDescription').val(selectedEvent.description);
+        $('#ddThemeColor').val(selectedEvent.color);
+
+        // open edit form
+        $('#eventInfoModal').modal('hide');
+        $('#addEditEventModal').modal();
+    });
+
+    $('#myEventBtnDelete').click(function () {
+        var row = jQuery(this).closest('tr');
+        var columns = row.find('td');
+        var eventID = columns[0].innerHTML; // get event ID
+
+        swal({
+            title: "Are you sure you want to delete this event?",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    $.ajax({
+                        type: "POST",
+                        url: 'MyEvents/DeleteEvent',
+                        data: { 'eventID': eventID },
+                        success: function (data) {
+                            if (data) {
+                                // Refresh calendar
+                                GetEventAndRenderCalendar();
+                                $('#eventInfoModal').modal('hide');
+                                alertify.success("Event successfully deleted");
+                                location.reload(); //refresh page
+                            }
+                            else {
+                                alertify.error("Event not successfully deleted");
+                            }
+                        },
+                        error: function () {
+                            alertify.error("Error: Event not deleted");
+                        }
+                    });
+                }
+            });
+    });
 
     // TODO: Figure out why clock doesn't display
     $('#txtStart,#dtp2').datetimepicker({
@@ -150,7 +221,7 @@
     });
 
     function openAddEditForm() {
-        if (selectedEvent !== null) {
+        if (selectedEvent !== null) { // Open edit window if event already exists
             $('#hdEventID').val(selectedEvent.id);
             $('#txtSubject').val(selectedEvent.title);
 
@@ -169,6 +240,9 @@
     }
 
     $('#btnSave').click(function () {
+        var startDate = moment($('#txtStart').val(), "MM/DD/YYYY HH:mm A").toDate();
+        var endDate = moment($('#txtEnd').val(), "MM/DD/YYYY HH:mm A").toDate();
+
         if ($('#txtSubject').val().trim() === "") {
             alert('Event title required');
             return;
@@ -184,8 +258,6 @@
             return;
         }
         else {
-            var startDate = moment($('#txtStart').val(), "MM/DD/YYYY HH:mm A").toDate();
-            var endDate = moment($('#txtEnd').val(), "MM/DD/YYYY HH:mm A").toDate();
             if (startDate > endDate) {
                 alert('Invalid end date');
                 return;
@@ -198,7 +270,7 @@
             Id: $('#hdEventID').val().trim(),
             Title: $('#txtSubject').val().trim(),
             StartTime: $('#txtStart').val().trim(),
-            EndTime: $('#chkIsFullDay').is(':checked') ? null : $('#txtEnd').val().trim(),
+            EndTime: $('#chkIsFullDay').is(':checked') ? endDate.toLocaleDateString() + " 11:59:59 PM" : $('#txtEnd').val().trim(),
             Description: $('#txtDescription').val(),
             Color: $('#ddThemeColor').val(),
             IsFullDay: $('#chkIsFullDay').is(':checked')
@@ -220,6 +292,7 @@
                     // Refresh calendar
                     GetEventAndRenderCalendar();
                     alertify.success('Event added successfully!');
+                    location.reload(); // refresh page
                 }
             },
             error: function () {

@@ -1,1 +1,25 @@
-[]
+[
+  {
+    "Id": "d5577b5d-f75a-4f17-8e10-f106eea2441b",
+    "Title": "My Book1",
+    "Description": "fagddsfgrgr",
+    "Color": null,
+    "IsFullDay": false,
+    "StartTime": "2020-08-21T00:00:00",
+    "EndTime": "2021-01-01T22:59:00",
+    "Image": null,
+    "Tags": null,
+    "IsCustomEvent": true
+  }
+]Id": "d5577b5d-f75a-4f17-8e10-f106eea2441b",
+    "Title": "My Book1",
+    "Description": null,
+    "Color": null,
+    "IsFullDay": false,
+    "StartTime": "2020-02-27T12:00:00",
+    "EndTime": "2020-02-27T12:50:00",
+    "Image": null,
+    "Tags": null,
+    "IsCustomEvent": true
+  }
+]

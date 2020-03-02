@@ -16,6 +16,7 @@ namespace MyCalendarApp.Models
 
         private Dictionary<string, Event> savedEvents = new Dictionary<string, Event>();
 
+        // Path to events.json file
         private string JsonFileName
         {
             get { return Path.Combine(WebHostEnvironment.WebRootPath, "data", "events.json"); }
@@ -28,7 +29,7 @@ namespace MyCalendarApp.Models
             WebHostEnvironment = webHostEnvironment;
 
             List<Event> eventList;
-            using (StreamReader r = new StreamReader(JsonFileName))
+            using (StreamReader r = new StreamReader(JsonFileName)) // read through
             {
                 string json = r.ReadToEnd();
                 eventList = JsonConvert.DeserializeObject<List<Event>>(json);

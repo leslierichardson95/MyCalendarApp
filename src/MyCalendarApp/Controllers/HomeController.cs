@@ -18,6 +18,7 @@ namespace MyCalendarApp.Controllers
             this.EventService = eventService;
         }
 
+        [Route("")]
         public IActionResult Index()
         {
             return View();
