@@ -8,6 +8,8 @@
     <div class="text-center">
         <h1 class="display-4">My Events</h1>
 
+        <br />
+
         <table class="table table-striped">
             <thead>
                 <tr>
@@ -18,7 +20,6 @@
                     <th style="display:none;">Is Full Day</th>
                     <th>Start Time</th>
                     <th>End Time</th>
-                    <th style="display:none;">Image</th>
                     <th>Tags</th>
                     <th style="display:none;">Is Custom Event</th>
                     <th style="display:none;"></th>
@@ -29,28 +30,48 @@
             <tbody>
                @foreach (Event myEvent in ViewData["MyEvents"] as List<Event>) 
                 {
-                    <tr>
-                        <td style="display:none;">@myEvent.Id</td>
-                        <td>@myEvent.Title</td>
+                <tr>
+                    <td style="display:none;">@myEvent.Id</td>
+                    <td>@myEvent.Title</td>
+                    @if (myEvent.Description.Contains("https://") || myEvent.Description.Contains("http://"))
+                    {
+                        <td><a href="@myEvent.Description">@myEvent.Description</a></td>
+                    }
+                    else
+                    {
                         <td>@myEvent.Description</td>
-                        <td style="display:none;">@myEvent.Color</td>
-                        <td style="display:none;">@myEvent.IsFullDay</td>
-                        <td>@myEvent.StartTime</td>
-                        <td>@myEvent.EndTime</td>
-                        <td style="display: none;">@myEvent.Image</td>
-                        <td>@myEvent.Tags</td> <!--TODO: Use loop to display tags-->
-                        <td style="display: none;">@myEvent.IsCustomEvent</td>
-                        <td>
-                            <button id="myEventBtnEdit" class="btn btn-warning btn-sm pull-right" style="margin-right:5px;">
-                                <i class="fas fa-pencil-alt"></i> Edit Event
-                            </button>
-                        </td>
-                        <td>
-                            <button id="myEventBtnDelete" class="btn btn-danger btn-sm pull-right">
-                                <i class="fas fa-trash-alt"></i> Delete Event
-                            </button>
-                        </td>
-                    </tr>
+                    }
+
+                    <td style="display:none;">@myEvent.Color</td>
+                    <td style="display:none;">@myEvent.IsFullDay</td>
+                    <td>@myEvent.StartTime</td>
+                    <td>@myEvent.EndTime</td>
+                    
+                    @{ string tags = ""; }
+                    @for (int i = 0; i < myEvent.Tags.Count; i++)
+                    {
+                        if (i == myEvent.Tags.Count - 1)
+                        {
+                            tags += myEvent.Tags[i];
+                        }
+                        else
+                        {
+                            tags = tags + myEvent.Tags[i] + ", ";
+                        }
+                    }
+                    <td>@tags</td>
+                    <td style="display: none;">@myEvent.IsCustomEvent</td>
+                    <td>
+                        <button id="myEventBtnEdit @myEvent.Id" class="myEventBtnEdit btn btn-warning btn-sm pull-right" style="margin-right:5px;" data-toggle="modal" data-target="#addEditEventModal">
+                            <i class="fas fa-pencil-alt"></i> Edit Event
+                        </button>
+                    </td>
+                    <td>
+                        <button id="myEventBtnDelete @myEvent.Id" class="myEventBtnDelete btn btn-danger btn-sm pull-right">
+                            <i class="fas fa-trash-alt"></i> Delete Event
+                        </button>
+                    </td>
+                </tr>
                 }
             </tbody>
         </table>

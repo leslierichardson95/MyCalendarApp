@@ -6,9 +6,16 @@ using System.Threading.Tasks;
 
 namespace MyCalendarApp.Models
 {
-    // Class representing custom events and events added from Ticketmaster API
+    /// <summary>
+    /// Class representing custom events and events added from Ticketmaster API
+    /// </summary>
     public class Event
     {
+        public Event()
+        {
+            Tags = new List<string>();
+        }
+
         // Unique ID for each event
         [JsonProperty("id", NullValueHandling = NullValueHandling.Ignore)]
         public string Id { get; set; }
@@ -36,10 +43,6 @@ namespace MyCalendarApp.Models
         // The event's end date and end time
         [JsonProperty("endTime", NullValueHandling = NullValueHandling.Ignore)]
         public DateTime EndTime { get; set; }
-
-        // An image representing the event
-        [JsonProperty("image", NullValueHandling = NullValueHandling.Ignore)]
-        public string Image { get; set; }
 
         // Custom tags associated with the event
         [JsonProperty("tags", NullValueHandling = NullValueHandling.Ignore)]

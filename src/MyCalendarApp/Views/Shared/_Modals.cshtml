@@ -64,13 +64,6 @@
                         <textarea name="Description" id="txtDescription" rows="3" class="form-control"></textarea>
                     </div>
                     <div class="form-group">
-                        <label>Upload Event Image</label>
-                        <div class="custom-file">
-                            <label class="custom-file-label" for="eventImage"></label>
-                            <input type="file" name="Image" class="custom-file-input" accept="image/*" id="eventImage" />
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label>Theme Color</label>
                         <select name="Color" id="ddThemeColor" class="form-control">
                             <option value="">Default</option>
@@ -82,7 +75,11 @@
                     </div>
                     <div class="form-group">
                         <label>Event Tags</label>
-                        <input type="text" name="Tags" id="eventTags" class="form-control" placeholder="Separate each tag with a comma (,)"/>
+                        <input type="text" name="Tags" id="eventTags" class="form-control" placeholder="Separate each tag with a comma (,) and space" />
+                    </div>
+                    <div style="display: none" class="form-group">
+                        <label>Is Custom Event</label>
+                        <input type="text" name="customEvent" id="isCustomEvent" class="form-control"/>
                     </div>
                     <button type="button" id="btnSave" class="btn btn-success">Save</button>
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
