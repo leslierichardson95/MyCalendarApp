@@ -222,6 +222,10 @@
         }
     });
 
+    $('#addEventBtn').click(function () {
+        openAddEditForm();
+    });
+
     function openAddEditForm() {
         if (selectedEvent !== null) { // Open edit window if event already exists
             $('#hdEventID').val(selectedEvent.id);
