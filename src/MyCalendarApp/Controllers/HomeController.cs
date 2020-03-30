@@ -42,7 +42,6 @@ namespace MyCalendarApp.Controllers
             // Notify the event service to save the event if a valid one has been created by the user
             if (e != null)
             {
-                e.IsCustomEvent = true;
                 EventService.SaveEvent(e); // EventService will update or create the new event accordingly before saving
                 status = true;
             }

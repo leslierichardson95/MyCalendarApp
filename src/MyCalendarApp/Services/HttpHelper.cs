@@ -4,7 +4,9 @@ using System.Threading.Tasks;
 
 namespace MyCalendarApp.Controllers
 {
-    // A class for handling HTTP/API calls
+    /// <summary>
+    /// A class for handling HTTP/API requests
+    /// </summary>
     public class HttpHelper
     {
         private HttpClient Client;
@@ -16,6 +18,7 @@ namespace MyCalendarApp.Controllers
             BaseUrl = baseUrl;
         }
 
+        // Return GET requests
         public async Task<T> GetAsync<T>(string extraUrl)
         {
             string url = BaseUrl + "" + extraUrl;
@@ -32,6 +35,7 @@ namespace MyCalendarApp.Controllers
             return result;
         }
 
+        // Return GET Requests as strings
         public async Task<string> GetAsStringAsync(string extraUrl)
         {
             string url = BaseUrl + "" + extraUrl;
@@ -48,6 +52,7 @@ namespace MyCalendarApp.Controllers
             return result;
         }
 
+        // Return PUT Requests
         public async Task PutAsync(string extraUrl, long id)
         {
             //T result = default(T);

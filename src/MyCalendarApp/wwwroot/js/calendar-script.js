@@ -121,6 +121,7 @@
                                 // Refresh calendar
                                 GetEventAndRenderCalendar();
                                 $('#eventInfoModal').modal('hide');
+                                //notie.alert({ type: 'success', text: 'Event successfully deleted', time: 2 });
                                 alertify.success("Event successfully deleted");
                             }
                             else {
@@ -135,7 +136,7 @@
             });
     });
 
-    $('#myEventBtnEdit').click(function () {
+    $('.myEventBtnEdit').click(function () {
         var row = jQuery(this).closest('tr'); // get table row corresponding to selected "edit event" button
         var columns = row.find('td'); // get event info from row corresponding to selected "edit event" button
 
@@ -143,14 +144,13 @@
         selectedEvent = {
             id: columns[0].innerHTML,
             title: columns[1].innerHTML,
-            description: columns[2].innerHTML,
+            description: columns[2].innerText,
             color: columns[3].innerHTML,
             isFullDay: columns[4].innerHTML,
             start: columns[5].innerHTML,
             end: columns[6].innerHTML,
-            image: columns[7].innerHTML,
-            tags: columns[8].innerHTML,
-            isCustomEvent: columns[9].innerHTML
+            tags: columns[7].innerHTML,
+            isCustomEvent: columns[8].innerText
         };
 
         // Fill edit window with existing event info
@@ -160,16 +160,17 @@
         $('#chkIsFullDay').prop("checked", selectedEvent.allDay || false);
         $('#chkIsFullDay').change();
         $('#txtEnd').val(selectedEvent.end !== null ? selectedEvent.end : '');
-        //$('#txtEnd').val(selectedEvent.end);
         $('#txtDescription').val(selectedEvent.description);
         $('#ddThemeColor').val(selectedEvent.color);
+        $('#eventTags').val(selectedEvent.tags);
+        $('#isCustomEvent').val(selectedEvent.isCustomEvent);
 
         // open edit form
         $('#eventInfoModal').modal('hide');
         $('#addEditEventModal').modal();
     });
 
-    $('#myEventBtnDelete').click(function () {
+    $('.myEventBtnDelete').click(function () {
         var row = jQuery(this).closest('tr');
         var columns = row.find('td');
         var eventID = columns[0].innerHTML; // get event ID
@@ -191,7 +192,8 @@
                                 // Refresh calendar
                                 GetEventAndRenderCalendar();
                                 $('#eventInfoModal').modal('hide');
-                                alertify.success("Event successfully deleted");
+                                //notie.alert({ type: 'success', text: 'Event successfully deleted', time: 4 });
+                                //alertify.success("Event successfully deleted");
                                 location.reload(); //refresh page
                             }
                             else {
@@ -234,6 +236,8 @@
             $('#txtEnd').val(selectedEvent.end.format('MM/DD/YYYY HH:mm A'));
             $('#txtDescription').val(selectedEvent.description);
             $('#ddThemeColor').val(selectedEvent.color);
+            $('#isCustomEvent').val(selectedEvent.isCustomEvent);
+            $('#eventTags').val(selectedEvent.tags);
         }
         $('#eventInfoModal').modal('hide');
         $('#addEditEventModal').modal();
@@ -270,10 +274,12 @@
             Id: $('#hdEventID').val().trim(),
             Title: $('#txtSubject').val().trim(),
             StartTime: $('#txtStart').val().trim(),
-            EndTime: $('#chkIsFullDay').is(':checked') ? endDate.toLocaleDateString() + " 11:59:59 PM" : $('#txtEnd').val().trim(),
+            EndTime: $('#chkIsFullDay').is(':checked') ? startDate.toLocaleDateString() + " 11:59:59 PM" : $('#txtEnd').val().trim(),
             Description: $('#txtDescription').val(),
             Color: $('#ddThemeColor').val(),
-            IsFullDay: $('#chkIsFullDay').is(':checked')
+            IsFullDay: $('#chkIsFullDay').is(':checked'),
+            Tags: $('#eventTags').val().split(', '),
+            IsCustomEvent: $('#isCustomEvent').val() === "False" || $('#isCustomEvent').val() === "false" ? false : true
         };
 
         // Save new event

@@ -11,6 +11,9 @@ using System.Diagnostics.Tracing;
 
 namespace MyCalendarApp.Models
 {
+    /// <summary>
+    /// Handler for event-related actions
+    /// </summary>
     public class EventService
     {
 
@@ -55,6 +58,10 @@ namespace MyCalendarApp.Models
                 {
                     savedEvents[e.Id] = e;
                 }
+                else // if the event exists but hasn't been added to savedEvents, add it to savedEvents
+                {
+                    savedEvents.Add(e.Id, e);
+                }
             }
             else // if the event is new, create a unique ID and add to savedEvents
             {
@@ -79,11 +86,53 @@ namespace MyCalendarApp.Models
                 WriteJson(); // update JSON file
                 return true;
             }
-        } 
+        }
+
+        public void ConvertTmEvent(TmEvent tmEvent)
+        {
+            Event newEvent = new Event();
+            newEvent.Id = tmEvent.Id;
+            newEvent.Title = tmEvent.Name;
+            newEvent.Description = tmEvent.Url;
+
+            // Check for which non-null TM Date/Time to add to the new event
+            if (tmEvent.Date.Start.DateTime == DateTime.MinValue)
+            {
+                newEvent.StartTime = tmEvent.Date.Start.LocalDate;
+            }
+            else
+            {
+                newEvent.StartTime = tmEvent.Date.Start.DateTime;
+            }
+
+            if (tmEvent.Date.End == null)
+            {
+                newEvent.EndTime = newEvent.StartTime.AddHours(3);
+            }
+            else
+            {
+                if (tmEvent.Date.End.DateTime == DateTime.MinValue)
+                {
+                    newEvent.EndTime = tmEvent.Date.End.LocalDate;
+                }
+                else
+                {
+                    newEvent.EndTime = tmEvent.Date.End.DateTime;
+                }
+            }
+
+            newEvent.Color = "Black";
+            newEvent.IsFullDay = false;
+            newEvent.IsCustomEvent = false;
+            newEvent.Tags.Add(tmEvent.Classifications[0].Segment.Name);
+
+            SaveEvent(newEvent);
+        }
 
         // Update JSON file
         private void WriteJson()
         {
+            System.IO.File.WriteAllText(JsonFileName, string.Empty);
             using (FileStream outputStream = File.OpenWrite(JsonFileName))
             {
                 System.Text.Json.JsonSerializer.Serialize<IEnumerable<Event>>(

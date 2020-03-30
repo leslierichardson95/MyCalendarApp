@@ -1,25 +1,81 @@
-[]
+[
   {
-    "Id": "d5577b5d-f75a-4f17-8e10-f106eea2441b",
-    "Title": "My Book1",
-    "Description": "fagddsfgrgr",
+    "Id": "vvG1HZpdkE1ew1",
+    "Title": "Justin Bieber",
+    "Description": "https://www.ticketmaster.com/justin-bieber-seattle-washington-05-14-2020/event/0F005831A7282C8A",
+    "Color": "Black",
+    "IsFullDay": false,
+    "StartTime": "2020-05-15T02:00:00Z",
+    "EndTime": "2020-05-15T05:00:00Z",
+    "Tags": [
+      "Music"
+    ],
+    "IsCustomEvent": false
+  },
+  {
+    "Id": "vvG1HZpeE15Nbl",
+    "Title": "Dave Matthews Band",
+    "Description": "https://concerts.livenation.com/dave-matthews-band-george-washington-09-06-2020/event/0F005829CA2E362B",
+    "Color": "Black",
+    "IsFullDay": false,
+    "StartTime": "2020-09-07T00:00:00Z",
+    "EndTime": "2020-09-07T03:00:00Z",
+    "Tags": [
+      "Music"
+    ],
+    "IsCustomEvent": false
+  },
+  {
+    "Id": "0b13c5f9-7e4f-4ded-bee7-cb468907f6bd",
+    "Title": "April Fool\u0027s Day!",
+    "Description": "Prank somebody!",
     "Color": null,
     "IsFullDay": false,
-    "StartTime": "2020-08-21T00:00:00",
-    "EndTime": "2021-01-01T22:59:00",
-    "Image": null,
-    "Tags": null,
+    "StartTime": "2020-04-01T00:00:00",
+    "EndTime": "2020-04-01T23:59:59",
+    "Tags": [
+      "Holiday",
+      "Special"
+    ],
     "IsCustomEvent": true
-  }
-]Id": "d5577b5d-f75a-4f17-8e10-f106eea2441b",
-    "Title": "My Book1",
-    "Description": null,
-    "Color": null,
+  },
+  {
+    "Id": "vvG1HZ4z2Nhfmw",
+    "Title": "Def Leppard/M\u00F6tley Cr\u00FCe/Poison/Joan Jett and the Blackhearts",
+    "Description": "https://www.ticketmaster.com/def-leppardmotley-cruepoisonjoan-jett-and-the-seattle-washington-09-02-2020/event/0F005783E36D4BB2",
+    "Color": "Black",
     "IsFullDay": false,
-    "StartTime": "2020-02-27T12:00:00",
-    "EndTime": "2020-02-27T12:50:00",
-    "Image": null,
-    "Tags": null,
-    "IsCustomEvent": true
+    "StartTime": "2020-09-02T23:30:00Z",
+    "EndTime": "2020-09-03T02:30:00Z",
+    "Tags": [
+      "Music"
+    ],
+    "IsCustomEvent": false
+  },
+  {
+    "Id": "vvG1HZ4wKgz0ln",
+    "Title": "Hella Mega Tour-Green Day/Fall Out Boy/Weezer Pres. by Harley-Davidson",
+    "Description": "https://www.ticketmaster.com/hella-mega-tourgreen-dayfall-out-boyweezer-seattle-washington-07-17-2020/event/0F005724F5E24AEA",
+    "Color": "Black",
+    "IsFullDay": false,
+    "StartTime": "2020-07-18T00:30:00Z",
+    "EndTime": "2020-07-18T03:30:00Z",
+    "Tags": [
+      "Music"
+    ],
+    "IsCustomEvent": false
+  },
+  {
+    "Id": "vvG1HZ4UQQ3sn8",
+    "Title": "Seattle Mariners vs. New York Yankees",
+    "Description": "https://www.ticketmaster.com/seattle-mariners-vs-new-york-yankees-seattle-washington-06-03-2020/event/0F0057669A4B1A90",
+    "Color": "Black",
+    "IsFullDay": false,
+    "StartTime": "2020-06-03T19:40:00Z",
+    "EndTime": "2020-06-03T22:40:00Z",
+    "Tags": [
+      "Sports"
+    ],
+    "IsCustomEvent": false
   }
 ]
